@@ -42,6 +42,8 @@ class BottomSheetView: UIView {
         ])
         mainView = UIView()
         mainView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.layer.cornerRadius = 15
+        mainView.clipsToBounds = true
         mainView.backgroundColor = .white
         self.addSubview(mainView)
         

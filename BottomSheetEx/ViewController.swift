@@ -19,6 +19,7 @@ class ViewController: UIViewController , BottomSheetDelegate{
         // Do any additional setup after loading the view.
         view.backgroundColor = .cyan
         
+        
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "First View Controller"
@@ -44,30 +45,34 @@ class ViewController: UIViewController , BottomSheetDelegate{
         ])
         
     }
-    
-//    @objc func butTapped(){
-//        let vc = BottomSheetView()
-////        self.navigationController.
-//    }
+  
     
     @objc func loadBottomSheet(){
         bottomSheet = BottomSheetView()
         bottomSheet.translatesAutoresizingMaskIntoConstraints = false
         bottomSheet.delegate = self
         view.addSubview(bottomSheet)
+        bottomSheet.transform = CGAffineTransform(translationX: 0, y: 500)
         NSLayoutConstraint.activate([
             bottomSheet.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             bottomSheet.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             bottomSheet.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             bottomSheet.heightAnchor.constraint(equalToConstant: 500)
         ])
+        
+        UIView.animate(withDuration: 0.3) { [self] in
+            bottomSheet.transform = CGAffineTransform.identity
+        }
     }
+
+    
 
     func crossButton() {
         if bottomSheet != nil{
             bottomSheet.removeFromSuperview()
             bottomSheet = nil
         }
+        
     }
     
     func secondViewButton() {
@@ -75,8 +80,13 @@ class ViewController: UIViewController , BottomSheetDelegate{
             bottomSheet.removeFromSuperview()
             bottomSheet = nil
         }
-        let vc = SecondViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = SecondViewController()
+//        print(navigationController?.pushViewController(vc, animated: true))
+        let vc : SecondViewController? = SecondViewController()
+        vc?.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc!, animated: true)
+//        present(navController, animated: true, completion: nil)
+       
     }
 
 }
